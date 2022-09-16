@@ -1,3 +1,5 @@
+# https://blog.csdn.net/See_Star/article/details/103044722
+
 import cv2
 import numpy as np
 from pickle import dump, load
@@ -29,6 +31,7 @@ while cap.isOpened():
                 rect = cv2.minAreaRect(c)
                 box = cv2.boxPoints(rect)
                 cv2.drawContours(frame, [np.int0(box)], -1, (0, 255, 255), 2)
+                cv2.circle(frame, (np.mean(box[:, 0]), np.mean(box[:, 1])), 5, (0, 0, 255), 0)
 
             cv2.imshow('camera', frame)
             cv2.waitKey(1)
