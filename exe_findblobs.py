@@ -1,8 +1,8 @@
 # https://blog.csdn.net/See_Star/article/details/103044722
-
 import cv2
 import numpy as np
 from pickle import dump, load
+from utils_kalman import KalmanFilter
 
 try:
     f = open('color_dist.pickle', 'rb')
@@ -12,6 +12,9 @@ except FileNotFoundError:
 
 cap = cv2.VideoCapture(0)
 cv2.namedWindow('camera', cv2.WINDOW_AUTOSIZE)
+
+KFx = KalmanFilter()
+KFy = KalmanFilter()
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -30,8 +33,20 @@ while cap.isOpened():
             else:
                 rect = cv2.minAreaRect(c)
                 box = cv2.boxPoints(rect)
+
+                # draw contours
                 # cv2.drawContours(frame, [np.int0(box)], -1, (0, 255, 255), 2)
+
+                # center coordinates
                 centercoor = (np.mean(box[:, 0]), np.mean(box[:, 1]))
+                # draw center
+                cv2.circle(frame, centercoor, 10, (255, 0, 0), 0)
+
+                # kalman
+                centerx = KFx.predict(centercoor[0])
+                centery = KFy.predict(centercoor[1])
+                centercoor = (int(centerx), int(centery))
+                # draw center (kalman)
                 cv2.circle(frame, centercoor, 10, (0, 0, 255), 0)
 
             cv2.imshow('camera', frame)
