@@ -2,7 +2,7 @@
 import cv2
 import numpy as np
 from pickle import dump, load
-from utils_kalman import KalmanFilter
+from utils_kalman import SageHusaAdaptiveKalmanFilter
 
 try:
     f = open('color_dist.pickle', 'rb')
@@ -13,8 +13,8 @@ except FileNotFoundError:
 cap = cv2.VideoCapture(0)
 cv2.namedWindow('camera', cv2.WINDOW_AUTOSIZE)
 
-KFx = KalmanFilter()
-KFy = KalmanFilter()
+KFx = SageHusaAdaptiveKalmanFilter()
+KFy = SageHusaAdaptiveKalmanFilter()
 
 while cap.isOpened():
     ret, frame = cap.read()
