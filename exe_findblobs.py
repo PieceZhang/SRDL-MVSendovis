@@ -50,7 +50,9 @@ while cap.isOpened():
                 cv2.circle(frame, centercoor, 10, (0, 0, 255), 0)
 
             cv2.imshow('camera', frame)
-            cv2.waitKey(1)
+            key = cv2.waitKey(1)
+            if key == ord('q'):
+                break
         else:
             print("无画面")
     else:
