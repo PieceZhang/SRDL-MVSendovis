@@ -122,4 +122,5 @@ dmypy.json
 .pyre/
 
 
-/network_search/
+/goturn.caffemodel
+/goturn.prototxt
