@@ -24,7 +24,7 @@ if __name__ == '__main__':
         [0, 760.644078563433, 438.820537782568],
         [0, 0, 1]
     ])
-    IntrinsicMatrix = {1: inmat2, 2: inmat2}
+    IntrinsicMatrix = {1: inmat1, 2: inmat2}
     del inmat1
     del inmat2
 
@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
     # Distortion Map  # cv2.remap(frame, mapx, mapy, cv2.INTER_LINEAR)
     mapx1, mapy1 = cv2.initUndistortRectifyMap(IntrinsicMatrix[1], DistortionMatrix[1], None, IntrinsicMatrix[1], (FRAME_WIDTH, FRAME_HEIGHT), 5)
-    mapx2, mapy2 = cv2.initUndistortRectifyMap(IntrinsicMatrix[1], DistortionMatrix[1], None, IntrinsicMatrix[1], (FRAME_WIDTH, FRAME_HEIGHT), 5)
+    mapx2, mapy2 = cv2.initUndistortRectifyMap(IntrinsicMatrix[2], DistortionMatrix[2], None, IntrinsicMatrix[2], (FRAME_WIDTH, FRAME_HEIGHT), 5)
     DistortionMap = {1: [mapx1, mapy1], 2: [mapx2, mapy2]}
     del mapx1
     del mapx2
@@ -49,11 +49,11 @@ if __name__ == '__main__':
         [0.998290037288904, -0.00951188725320263, 0.0576760387908361],
         [0.0128794062807095, 0.998216073609958, -0.0582991533435562],
         [-0.0570186140096029, 0.0589422971014994, 0.996631668806898]
-    ])  # 使用与MATLAB相同的R (Rotation of camera 2 relative to camera 1, specified as a 3-by-3 matrix.)
-    R = np.transpose(R)  # TODO
+    ])  # MATLAB标定得到的R (Rotation of camera 2 relative to camera 1, specified as a 3-by-3 matrix.)
+    R = np.transpose(R)  # 转置的R
     T = np.array([-72.7613525847681, 2.54763038611376, 1.19861035571247])
     RL, RR, PL, PR, Q, roiL, roiR = cv2.stereoRectify(IntrinsicMatrix[1], DistortionMatrix[1], IntrinsicMatrix[2], DistortionMatrix[2],
-                                                      (FRAME_WIDTH, FRAME_HEIGHT), R, T)
+                                                      (FRAME_WIDTH, FRAME_HEIGHT), R, T, 1, (0, 0))
     camera1map = cv2.initUndistortRectifyMap(IntrinsicMatrix[1], DistortionMatrix[1], RL, PL, (FRAME_WIDTH, FRAME_HEIGHT), cv2.CV_16SC2)
     camera2map = cv2.initUndistortRectifyMap(IntrinsicMatrix[2], DistortionMatrix[2], RR, PR, (FRAME_WIDTH, FRAME_HEIGHT), cv2.CV_16SC2)
     StereoMap = {1: camera1map, 2: camera2map}
