@@ -4,6 +4,7 @@ from exe_mvs import *
 
 if __name__ == '__main__':
     cv2.namedWindow("depth")
+    cv2.namedWindow("depth(normalized)")
     while True:
         ret, camera1_frame = camera1.read()
         ret, camera2_frame = camera2.read()
@@ -21,10 +22,11 @@ if __name__ == '__main__':
         cv2.imshow("camera2", cv2.resize(camera2_frame, (WINDOW_WIDTH, WINDOW_HEIGHT), interpolation=cv2.INTER_CUBIC))
 
         # stereo = cv2.StereoSGBM_create(0, 32, 49)
-        stereo = cv2.StereoBM_create(numDisparities=128, blockSize=49)
+        stereo = cv2.StereoBM_create(numDisparities=256, blockSize=39)
         disparity = stereo.compute(camera1_frame, camera2_frame)
-        disp = cv2.normalize(disparity, disparity, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
-        cv2.imshow("depth", disp)
+        cv2.imshow("depth", disparity)
+        disparitynorm = cv2.normalize(disparity, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+        cv2.imshow("depth(normalized)", disparitynorm)
 
         key = cv2.waitKey(1)
         if key == ord("q"):
