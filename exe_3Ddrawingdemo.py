@@ -18,7 +18,7 @@ Z = 82.1
 class Curve(object):
     def __init__(self, maxl=100):
         self.maxl = maxl
-        self.data = np.ndarray([maxl + 1])
+        self.data = np.ndarray([maxl])
         self.count = 0
         self.ifover = False
 
