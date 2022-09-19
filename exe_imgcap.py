@@ -4,11 +4,11 @@ import cv2
 import time
 import os
 
-camera1 = cv2.VideoCapture(1)
+camera1 = cv2.VideoCapture(2)
 camera1.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 camera1.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
-camera2 = cv2.VideoCapture(2)
+camera2 = cv2.VideoCapture(1)
 camera2.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 

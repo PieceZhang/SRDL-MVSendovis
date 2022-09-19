@@ -14,13 +14,13 @@ WINDOW_HEIGHT = int(FRAME_HEIGHT * 0.5)
 
 # Intrinsic Matrix
 inmat1 = np.array([
-    [755.053555619699, 0, 611.137809040916],
-    [0, 755.420874245366, 480.875606387114],
+    [729.805504098369, 0, 648.974913106474],
+    [0, 730.860418019541, 418.936872740850],
     [0, 0, 1]
 ])
 inmat2 = np.array([
-    [759.634441311578, 0, 622.777285714703],
-    [0, 760.644078563433, 438.820537782568],
+    [731.797077430788, 0, 632.311698457381],
+    [0, 731.384427290877, 368.705044840897],
     [0, 0, 1]
 ])
 IntrinsicMatrix = {1: inmat1, 2: inmat2}
@@ -28,8 +28,8 @@ del inmat1
 del inmat2
 
 # Distortion Matrix (先立体矫正，再畸变矫正)
-d1 = np.array([0.0535060468398628, -0.0569491782579694, 0, 0, 0])  # k1, k2, p1, p2, k3
-d2 = np.array([0.0720300806581665, -0.0891592797503086, 0, 0, 0])  # k1, k2, p1, p2, k3
+d1 = np.array([0.0676319395832053, -0.0718284677630564, 0, 0, 0])  # k1, k2, p1, p2, k3
+d2 = np.array([0.0690562232934869, -0.0669207185079367, 0, 0, 0])  # k1, k2, p1, p2, k3
 DistortionMatrix = {1: d1, 2: d2}
 del d1
 del d2
@@ -45,12 +45,12 @@ del mapy2
 
 # Stereo Rectify
 R = np.array([
-    [0.998290037288904, -0.00951188725320263, 0.0576760387908361],
-    [0.0128794062807095, 0.998216073609958, -0.0582991533435562],
-    [-0.0570186140096029, 0.0589422971014994, 0.996631668806898]
+    [0.998634412480918, -0.0384450280065628, 0.0353735781405737],
+    [0.0370254061436707, 0.998515526343090, 0.0399482534246386],
+    [-0.0368568787173969, -0.0385839794909432, 0.998575408778853]
 ])  # MATLAB标定得到的R (Rotation of camera 2 relative to camera 1, specified as a 3-by-3 matrix.)
 R = np.transpose(R)  # 转置的R
-T = np.array([-72.7613525847681, 2.54763038611376, 1.19861035571247])
+T = np.array([-34.3888358134576, 3.98282280687758, -0.250840913890431])
 RL, RR, PL, PR, Q, roiL, roiR = cv2.stereoRectify(IntrinsicMatrix[1], DistortionMatrix[1], IntrinsicMatrix[2], DistortionMatrix[2],
                                                   (FRAME_WIDTH, FRAME_HEIGHT), R, T, 1, (0, 0))
 camera1map = cv2.initUndistortRectifyMap(IntrinsicMatrix[1], DistortionMatrix[1], RL, PL, (FRAME_WIDTH, FRAME_HEIGHT), cv2.CV_16SC2)
@@ -59,10 +59,10 @@ StereoMap = {1: camera1map, 2: camera2map}
 del camera1map
 del camera2map
 
-camera1 = cv2.VideoCapture(1)
+camera1 = cv2.VideoCapture(2)
 camera1.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
 camera1.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
-camera2 = cv2.VideoCapture(2)
+camera2 = cv2.VideoCapture(1)
 camera2.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
 camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
 cv2.namedWindow("camera1")
