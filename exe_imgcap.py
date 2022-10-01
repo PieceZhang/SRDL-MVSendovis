@@ -8,7 +8,7 @@ camera1 = cv2.VideoCapture(2)
 camera1.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 camera1.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
-camera2 = cv2.VideoCapture(1)
+camera2 = cv2.VideoCapture(0)
 camera2.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
@@ -42,8 +42,11 @@ while True:
     ret, camera1_frame = camera1.read()
     ret, camera2_frame = camera2.read()
 
-    camera1_frame = cv2.flip(camera1_frame, -1)
-    camera2_frame = cv2.flip(camera2_frame, -1)
+    # camera1_frame = cv2.flip(camera1_frame, -1)
+    # camera2_frame = cv2.flip(camera2_frame, -1)
+
+    # camera1_frame = cv2.line(camera1_frame, (0, 360), (1280, 360), (0, 0, 255), 5)  # 绘制极线
+    # camera2_frame = cv2.line(camera2_frame, (0, 360), (1280, 360), (0, 0, 255), 5)  # 绘制极线
 
     cv2.imshow("camera1", cv2.resize(camera1_frame, (640, 360), interpolation=cv2.INTER_CUBIC))
     cv2.imshow("camera2", cv2.resize(camera2_frame, (640, 360), interpolation=cv2.INTER_CUBIC))
