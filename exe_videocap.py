@@ -2,6 +2,7 @@
 
 import cv2
 import os
+import time
 
 FRAME_WIDTH = int(1280 * 1)  # 1280
 FRAME_HEIGHT = int(720 * 1)  # 720
@@ -24,9 +25,6 @@ cv2.moveWindow("camera2", 700, 0)
 camera1path = r'./videocap/cam1'
 camera2path = r'./videocap/cam2'
 
-camera1name = camera1path + '/cam1video.avi'
-camera2name = camera2path + '/cam2video.avi'
-
 if not os.path.exists(camera1path):
     os.mkdir(camera1path)
 if not os.path.exists(camera2path):
@@ -34,8 +32,6 @@ if not os.path.exists(camera2path):
 
 codec = cv2.VideoWriter_fourcc(*'XVID')
 fps = 25
-output1 = cv2.VideoWriter(camera1name, codec, fps, (FRAME_WIDTH, FRAME_HEIGHT))
-output2 = cv2.VideoWriter(camera2name, codec, fps, (FRAME_WIDTH, FRAME_HEIGHT))
 
 startcap = False
 
@@ -55,16 +51,28 @@ while True:
 
     key = cv2.waitKey(1)
     if key == ord("q"):
-        print("========Stop capture========")
+        if startcap:
+            startcap = False
+            output1.release()
+            output2.release()
+            print("[INFO] Stop capture, filename: {}".format(timestamp))
         break
     elif key == ord("s"):
         if not startcap:
             startcap = True
-            print("========Start capture========")
+            timestamp = time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime())
+            camera1name = camera1path + '/cam1video_{}.avi'.format(timestamp)
+            camera2name = camera2path + '/cam2video_{}.avi'.format(timestamp)
+            output1 = cv2.VideoWriter(camera1name, codec, fps, (FRAME_WIDTH, FRAME_HEIGHT))
+            output2 = cv2.VideoWriter(camera2name, codec, fps, (FRAME_WIDTH, FRAME_HEIGHT))
+            print("[INFO] Start capture, filename: {}".format(timestamp))
+        elif startcap:
+            startcap = False
+            output1.release()
+            output2.release()
+            print("[INFO] Stop capture, filename: {}".format(timestamp))
 
 camera1.release()
 camera2.release()
-output1.release()
-output2.release()
 cv2.destroyWindow("camera1")
 cv2.destroyWindow("camera2")
