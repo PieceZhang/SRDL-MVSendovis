@@ -1,4 +1,5 @@
 # https://blog.csdn.net/qq_38784098/article/details/82144106
+# CV模型：https://blog.csdn.net/weixin_40673873/article/details/106742431
 
 import cv2
 import numpy as np
