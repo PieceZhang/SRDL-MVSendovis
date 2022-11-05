@@ -3,12 +3,13 @@ import cv2
 import os
 
 img_list = []
-output_name = 'cam1'
-input_path = r"D:\B_SRDL\SRDL-MVSendovis\imgcap\{}".format(output_name)  # 要处理的图片所在的文件夹
-output_path = r"D:\B_SRDL\SRDL-MVSendovis\imgcap\{}_gray".format(output_name)  # 处理完的图片放在这里
+output_name = 'cam4'
+input_path = r"D:\B_SRDL\SRDL-MVSendovis\imgcap\cam3&cam4\{}".format(output_name)  # 要处理的图片所在的文件夹
+output_path = r"D:\B_SRDL\SRDL-MVSendovis\imgcap\cam3&cam4\{}_gray".format(output_name)  # 处理完的图片放在这里
 for item in os.listdir(input_path):
     img_list.append(os.path.join(input_path, item))
-print(list)
+if not os.path.exists(output_path):
+    os.mkdir(output_path)
 count = 0
 for imagepath in img_list:
     # print(imagepath)
@@ -21,4 +22,4 @@ for imagepath in img_list:
     count += 1
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     cv2.imshow('garyimg', image)
-    cv2.waitKey(0)
+    cv2.waitKey(1)
