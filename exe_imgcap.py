@@ -19,10 +19,10 @@ camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 AUTO = False  # True自动拍照，False则手动按s键拍照
 INTERVAL = 0.0000005  # 调整自动拍照间隔
 
-cv2.namedWindow("camera{}".format(cam1num))
-cv2.namedWindow("camera{}".format(cam2num))
-cv2.moveWindow("camera{}".format(cam1num), 0, 0)
-cv2.moveWindow("camera{}".format(cam2num), 700, 0)
+cv2.namedWindow("camera1")
+cv2.namedWindow("camera2")
+cv2.moveWindow("camera1", 0, 0)
+cv2.moveWindow("camera2", 700, 0)
 
 counter = 0
 utc = time.time()
@@ -54,11 +54,11 @@ while True:
     # camera1_frame = cv2.line(camera1_frame, (0, 360), (1280, 360), (0, 0, 255), 5)  # 绘制极线
     # camera2_frame = cv2.line(camera2_frame, (0, 360), (1280, 360), (0, 0, 255), 5)  # 绘制极线
 
-    cv2.imshow("camera{}".format(cam1num), cv2.resize(camera1_frame, (640, 360), interpolation=cv2.INTER_CUBIC))
-    cv2.imshow("camera{}".format(cam2num), cv2.resize(camera2_frame, (640, 360), interpolation=cv2.INTER_CUBIC))
+    cv2.imshow("camera1", cv2.resize(camera1_frame, (640, 360), interpolation=cv2.INTER_CUBIC))
+    cv2.imshow("camera2", cv2.resize(camera2_frame, (640, 360), interpolation=cv2.INTER_CUBIC))
 
-    # cv2.imshow("camera{}".format(cam1num), camera1_frame)
-    # cv2.imshow("camera{}".format(cam2num), camera2_frame)
+    # cv2.imshow("camera1", camera1_frame)
+    # cv2.imshow("camera2", camera2_frame)
 
     now = time.time()
     if AUTO and now - utc >= INTERVAL:

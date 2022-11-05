@@ -10,8 +10,8 @@ WINDOW_WIDTH = int(FRAME_WIDTH * 0.5)
 WINDOW_HEIGHT = int(FRAME_HEIGHT * 0.5)
 
 camID = {1: 0, 2: 3, 3: 4, 4: 2}
-cam1num = 3
-cam2num = 4
+cam1num = 1
+cam2num = 2
 
 camera1 = cv2.VideoCapture(camID[cam1num])
 camera1.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
@@ -21,10 +21,10 @@ camera2 = cv2.VideoCapture(camID[cam2num])
 camera2.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
 camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
 
-cv2.namedWindow("camera{}".format(cam1num))
-cv2.namedWindow("camera{}".format(cam2num))
-cv2.moveWindow("camera{}".format(cam1num), 0, 0)
-cv2.moveWindow("camera{}".format(cam2num), 700, 0)
+cv2.namedWindow("camera1")
+cv2.namedWindow("camera2")
+cv2.moveWindow("camera1", 0, 0)
+cv2.moveWindow("camera2", 700, 0)
 
 camera1path = r'./videocap/cam{}'.format(cam1num)
 camera2path = r'./videocap/cam{}'.format(cam2num)
@@ -48,8 +48,8 @@ while True:
     # camera1_frame = cv2.transpose(cv2.flip(camera1_frame, 1))  # 90 degree
     # camera2_frame = cv2.transpose(cv2.flip(camera2_frame, 1))  # 90 degree
 
-    cv2.imshow("camera{}".format(cam1num), cv2.resize(camera1_frame, (WINDOW_WIDTH, WINDOW_HEIGHT), interpolation=cv2.INTER_CUBIC))
-    cv2.imshow("camera{}".format(cam2num), cv2.resize(camera2_frame, (WINDOW_WIDTH, WINDOW_HEIGHT), interpolation=cv2.INTER_CUBIC))
+    cv2.imshow("camera1", cv2.resize(camera1_frame, (WINDOW_WIDTH, WINDOW_HEIGHT), interpolation=cv2.INTER_CUBIC))
+    cv2.imshow("camera2", cv2.resize(camera2_frame, (WINDOW_WIDTH, WINDOW_HEIGHT), interpolation=cv2.INTER_CUBIC))
 
     if startcap:
         output1.write(camera1_frame)
