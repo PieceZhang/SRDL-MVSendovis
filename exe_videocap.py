@@ -9,7 +9,7 @@ FRAME_HEIGHT = int(720 * 1)  # 720
 WINDOW_WIDTH = int(FRAME_WIDTH * 0.5)
 WINDOW_HEIGHT = int(FRAME_HEIGHT * 0.5)
 
-camID = {1: 2, 2: 0}
+camID = {1: 0, 2: 2, 3: 3, 4: 4}
 cam1num = 1
 cam2num = 2
 

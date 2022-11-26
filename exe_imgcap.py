@@ -4,7 +4,7 @@ import cv2
 import time
 import os
 
-camID = {1: 0, 2: 3, 3: 4, 4: 2}
+camID = {1: 0, 2: 2, 3: 3, 4: 4}
 cam1num = 1
 cam2num = 2
 
