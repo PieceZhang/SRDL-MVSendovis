@@ -1,11 +1,12 @@
 # https://blog.csdn.net/qq_56839117/article/details/125216637
 import cv2
 import os
+import numpy as np
 
 img_list = []
-output_name = 'cam2'
-input_path = r"D:\B_SRDL\SRDL-MVSendovis\imgcap\cam1&cam2\{}".format(output_name)  # 要处理的图片所在的文件夹
-output_path = r"D:\B_SRDL\SRDL-MVSendovis\imgcap\cam1&cam2\{}_gray".format(output_name)  # 处理完的图片放在这里
+output_name = 'cam3'
+input_path = r"D:\B_SRDL\SRDL-MVSendovis\imgcap_system4\1&3\{}".format(output_name)  # 要处理的图片所在的文件夹
+output_path = r"D:\B_SRDL\SRDL-MVSendovis\imgcap_system4\1&3\{}_gray".format(output_name)  # 处理完的图片放在这里
 for item in os.listdir(input_path):
     img_list.append(os.path.join(input_path, item))
 if not os.path.exists(output_path):
@@ -17,6 +18,8 @@ for imagepath in img_list:
 
     # resize to default WINDOW_SIZE
     image = cv2.resize(image, (640, 360), interpolation=cv2.INTER_CUBIC)
+
+    # image = np.rot90(image)
 
     print(output_path + '\\' + '{}_{}.jpg'.format(count, output_name))  # 显示保存文件的路径及保存的文件名
     cv2.imwrite(output_path + '\\' + '{}_{}.jpg'.format(count, output_name), image)
