@@ -9,7 +9,7 @@ FRAME_HEIGHT = int(720 * 1)  # 720
 WINDOW_WIDTH = int(FRAME_WIDTH * 0.5)
 WINDOW_HEIGHT = int(FRAME_HEIGHT * 0.5)
 
-camID = {1: 0, 2: 3, 3: 4, 4: 2}
+camID = {1: 0, 2: 2, 3: 3, 4: 4}
 cam1num = 1
 cam2num = 2
 
@@ -35,7 +35,7 @@ if not os.path.exists(camera2path):
     os.mkdir(camera2path)
 
 codec = cv2.VideoWriter_fourcc(*'XVID')
-fps = 25
+fps = 30
 
 startcap = False
 
