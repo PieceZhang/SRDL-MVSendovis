@@ -7,8 +7,9 @@ import argparse
 
 parser = argparse.ArgumentParser(description='multi cams video capture')
 parser.add_argument('--num', default=2, type=int, help='number of cam')
-parser.add_argument('--nolist', default=[0, 1], type=list, help='cam no. list')
+parser.add_argument('--nolist', default='01', type=str, help='cam no. list')
 args = parser.parse_args()
+args.nolist = list(map(int, list(args.nolist)))
 assert args.num == len(args.nolist)
 
 FRAME_WIDTH = int(1280 * 1)  # 1280
