@@ -4,17 +4,17 @@ import cv2
 import time
 import os
 
-camID = {1: 0, 2: 2, 3: 3, 4: 4}
+camID = {1: 2, 2: 1, 3: 3, 4: 4}
 cam1num = 1
 cam2num = 2
 
 camera1 = cv2.VideoCapture(camID[cam1num])
-camera1.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-camera1.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+camera1.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+camera1.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
 camera2 = cv2.VideoCapture(camID[cam2num])
-camera2.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+camera2.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
 AUTO = False  # True自动拍照，False则手动按s键拍照
 INTERVAL = 0.0000005  # 调整自动拍照间隔
@@ -54,8 +54,8 @@ while True:
     # camera1_frame = cv2.line(camera1_frame, (0, 360), (1280, 360), (0, 0, 255), 5)  # 绘制极线
     # camera2_frame = cv2.line(camera2_frame, (0, 360), (1280, 360), (0, 0, 255), 5)  # 绘制极线
 
-    cv2.imshow("camera1", cv2.resize(camera1_frame, (640, 360), interpolation=cv2.INTER_CUBIC))
-    cv2.imshow("camera2", cv2.resize(camera2_frame, (640, 360), interpolation=cv2.INTER_CUBIC))
+    cv2.imshow("camera1", cv2.resize(camera1_frame, (640, 480), interpolation=cv2.INTER_CUBIC))
+    cv2.imshow("camera2", cv2.resize(camera2_frame, (640, 480), interpolation=cv2.INTER_CUBIC))
 
     # cv2.imshow("camera1", camera1_frame)
     # cv2.imshow("camera2", camera2_frame)

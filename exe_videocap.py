@@ -4,22 +4,24 @@ import cv2
 import os
 import time
 
-FRAME_WIDTH = int(1280 * 1)  # 1280
-FRAME_HEIGHT = int(720 * 1)  # 720
-WINDOW_WIDTH = int(FRAME_WIDTH * 0.5)
-WINDOW_HEIGHT = int(FRAME_HEIGHT * 0.5)
+FRAME_WIDTH = int(640 * 1)  # 1280
+FRAME_HEIGHT = int(480 * 1)  # 720
+WINDOW_WIDTH = int(FRAME_WIDTH )
+WINDOW_HEIGHT = int(FRAME_HEIGHT)
 
-camID = {1: 0, 2: 2, 3: 3, 4: 4}
+camID = {1: 2, 2: 1, 3: 3, 4: 4}
 cam1num = 1
 cam2num = 2
 
 camera1 = cv2.VideoCapture(camID[cam1num])
 camera1.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
 camera1.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
+camera1.set(cv2.CAP_PROP_AUTO_WB, 0)
 
 camera2 = cv2.VideoCapture(camID[cam2num])
 camera2.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
 camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
+camera2.set(cv2.CAP_PROP_AUTO_WB, 0)
 
 cv2.namedWindow("camera1")
 cv2.namedWindow("camera2")
